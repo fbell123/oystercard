@@ -1,4 +1,4 @@
-# oytstercard
+# Oyster Card
 
 
 ## Team wildcat smashed it today.
