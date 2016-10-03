@@ -3,6 +3,7 @@ class OysterCard
   MAX = 90
   DEFAULT_BALANCE = 5
   MINIMUM_BALANCE = 1
+  BASIC_FARE = 1
 
   attr_reader :balance, :in_journey, :station
 
@@ -28,8 +29,8 @@ class OysterCard
     @station
   end
 
-  def touch_out(amount = 1)
-    deduct(amount)
+  def touch_out
+    deduct(BASIC_FARE)
     @station = nil
     puts "Touched out #{station}"
     @station
