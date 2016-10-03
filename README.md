@@ -8,7 +8,7 @@ Worked through exercise 13, completing all tests along the journey.
 History of journeys saved after touch_out, oystercards charged on
 touch_in, all seems to work pretty well.
 
-```
+```ruby
 [1] pry(main)> require './lib/oystercard'
 => true
 [2] pry(main)> card = OysterCard.new
