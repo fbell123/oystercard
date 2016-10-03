@@ -23,7 +23,7 @@ describe OysterCard do
   end
 
   it 'Oyster card in journey' do
-    expect(subject.touch_in).to eq true
+    expect(subject.touch_in("Euston")).to eq true
     expect(subject.touch_out(0)).to eq false
   end
 
@@ -34,11 +34,16 @@ describe OysterCard do
   it 'expect an error if balance is less than £1 on touch in' do
     minimum = OysterCard::MINIMUM_BALANCE
     subject.touch_out 5
-    expect {subject.touch_in}.to raise_error("Not enough dollar $$$ need £#{minimum}")
+    expect {subject.touch_in("Euston")}.to raise_error("Not enough dollar $$$ need £#{minimum}")
   end
 
   it 'expect a charge to be deducted on touch out' do
     expect {subject.touch_out(1)}.to change{subject.balance}.by(-1)
+  end
+
+  it 'expect station to be recorded on touch in' do
+    subject.touch_in("Old Street")
+    expect(subject.station).to eq("Old Street")
   end
 
 end
