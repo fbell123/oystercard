@@ -1,11 +1,13 @@
 class OysterCard
-  
+
   MAX = 90
+  DEFAULT_BALANCE = 5
+  MINIMUM_BALANCE = 1
 
   attr_reader :balance, :in_journey
 
-  def initialize
-    @balance = 0
+  def initialize(balance=DEFAULT_BALANCE)
+    @balance = DEFAULT_BALANCE
     @in_journey = false
   end
 
@@ -23,6 +25,7 @@ class OysterCard
   end
 
   def touch_in
+    fail "Not enough dollar $$$ need £#{MINIMUM_BALANCE}" if balance < MINIMUM_BALANCE
     in_journey = true
   end
 
