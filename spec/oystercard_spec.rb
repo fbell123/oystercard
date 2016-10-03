@@ -24,11 +24,6 @@ describe OysterCard do
     expect(subject.balance).to eq(4)
   end
 
-  it 'Oyster card in journey' do
-    expect(subject.touch_in(:station)).to eq :station
-    expect(subject.touch_out(:station)).to eq nil
-  end
-
   it 'expect an error if balance is less than £1 on touch in' do
     minimum = OysterCard::MINIMUM_BALANCE
     5.times {subject.touch_out(:station)}
@@ -42,13 +37,22 @@ describe OysterCard do
 
   it 'expect station to be recorded on touch in' do
     subject.touch_in(:station)
-    expect(subject.station).to eq(:station)
+    expect(subject.journeys[0]).to eq(:station)
   end
 
   it 'true after touch in' do
-    subject.touch_in("Euston")
+    subject.touch_in(:station)
     expect(subject.in_journey?).to eq true
-end
+  end
 
+  it 'checks no journeys at touch in' do
+    expect(@journeys).to eq nil
+  end
+
+  it 'creates a journey from touch in to touch out' do
+    subject.touch_in(:station)
+    subject.touch_out(:station)
+    expect(subject.view_history.count).to eq 1
+  end
 
 end

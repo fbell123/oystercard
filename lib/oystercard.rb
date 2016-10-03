@@ -21,12 +21,11 @@ class OysterCard
   end
 
   def in_journey?
-    @station != nil
+    @journeys[0] != nil
   end
 
   def touch_in(entry_station)
     fail "Not enough dollar $$$ need £#{MINIMUM_BALANCE}" if balance < MINIMUM_BALANCE
-    @station = entry_station
     @journeys << entry_station
     puts "Touched in at #{entry_station}"
     @station
@@ -35,15 +34,18 @@ class OysterCard
   def touch_out(exit_station)
     @journeys << exit_station
     deduct(BASIC_FARE)
-    @station = nil
     puts "Touched out #{exit_station}"
     write_history
     @station
   end
 
   def write_history
-    @history[journeys[0]] = journeys[1] 
+    @history[journeys[0]] = journeys[1]
     @journeys.clear
+  end
+
+  def view_history
+    @history
   end
 
   private
