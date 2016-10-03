@@ -20,7 +20,17 @@ describe OysterCard do
   it 'deduct journey from balance' do
     subject.top_up(2)
     subject.deduct(1)
-    expect(subject.balance).to eq(1) 
+    expect(subject.balance).to eq(1)
   end
+
+  it 'Oyster card in journey' do
+    expect(subject.touch_in).to eq true
+    expect(subject.touch_out).to eq false
+  end
+
+  it 'in journey test' do
+    expect(subject.in_journey?).to eq false
+  end
+
 
 end
