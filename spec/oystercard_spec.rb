@@ -23,12 +23,8 @@ describe OysterCard do
   end
 
   it 'Oyster card in journey' do
-    expect(subject.touch_in("Euston")).to eq true
-    expect(subject.touch_out(0)).to eq false
-  end
-
-  it 'in journey test' do
-    expect(subject.in_journey?).to eq false
+    expect(subject.touch_in("Euston")).to eq "Euston"
+    expect(subject.touch_out(0)).to eq nil
   end
 
   it 'expect an error if balance is less than £1 on touch in' do
@@ -45,5 +41,11 @@ describe OysterCard do
     subject.touch_in("Old Street")
     expect(subject.station).to eq("Old Street")
   end
+
+  it 'true after touch in' do
+    subject.touch_in("Euston")
+    expect(subject.in_journey?).to eq true
+end
+
 
 end

@@ -18,21 +18,21 @@ class OysterCard
   end
 
   def in_journey?
-    @in_journey = in_journey
+    @station != nil
   end
 
   def touch_in(entry_station)
     fail "Not enough dollar $$$ need £#{MINIMUM_BALANCE}" if balance < MINIMUM_BALANCE
     @station = entry_station
-    puts "Touched in at #{station}"
-    in_journey = true
+    puts "Touched in at #{entry_station}"
+    @station
   end
 
   def touch_out(amount = 1)
     deduct(amount)
     @station = nil
     puts "Touched out #{station}"
-    in_journey = false
+    @station
   end
 
   private
