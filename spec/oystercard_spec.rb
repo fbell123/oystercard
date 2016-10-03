@@ -3,6 +3,8 @@ require './lib/oystercard'
 describe OysterCard do
   subject (:oystercard) {OysterCard.new}
 
+  let (:station) {double :station}
+
   it 'oyster card has balance' do
     expect(subject.balance).to eq(5)
   end
@@ -23,14 +25,14 @@ describe OysterCard do
   end
 
   it 'Oyster card in journey' do
-    expect(subject.touch_in("Euston")).to eq "Euston"
+    expect(subject.touch_in(:station)).to eq :station
     expect(subject.touch_out(0)).to eq nil
   end
 
   it 'expect an error if balance is less than £1 on touch in' do
     minimum = OysterCard::MINIMUM_BALANCE
     subject.touch_out 5
-    expect {subject.touch_in("Euston")}.to raise_error("Not enough dollar $$$ need £#{minimum}")
+    expect {subject.touch_in(:station)}.to raise_error("Not enough dollar $$$ need £#{minimum}")
   end
 
   it 'expect a charge to be deducted on touch out' do
@@ -38,8 +40,8 @@ describe OysterCard do
   end
 
   it 'expect station to be recorded on touch in' do
-    subject.touch_in("Old Street")
-    expect(subject.station).to eq("Old Street")
+    subject.touch_in(:station)
+    expect(subject.station).to eq(:station)
   end
 
   it 'true after touch in' do
