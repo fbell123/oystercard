@@ -18,7 +18,7 @@ describe OysterCard do
   end
 
   it 'deduct journey from balance' do
-    subject.send(:deduct, 1)
+    subject.touch_out 1
     expect(subject.balance).to eq(4)
   end
 
@@ -33,7 +33,7 @@ describe OysterCard do
 
   it 'expect an error if balance is less than £1 on touch in' do
     minimum = OysterCard::MINIMUM_BALANCE
-    subject.send(:deduct, 5)
+    subject.touch_out 5
     expect {subject.touch_in}.to raise_error("Not enough dollar $$$ need £#{minimum}")
   end
 
